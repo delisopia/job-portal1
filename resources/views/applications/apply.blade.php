@@ -170,15 +170,16 @@
 
                                 <div class="mb-3">
                                     <label for="telepon" class="form-label fw-semibold">
-                                        No. Telepon/WhatsApp <span class="text-danger">*</span>
+                                        No.WhatsApp <span class="text-danger">*</span>
                                     </label>
                                     <input type="text" 
-                                           class="form-control form-control-lg @error('telepon') is-invalid @enderror" 
-                                           id="telepon" 
-                                           name="telepon" 
-                                           placeholder="08xxxxxxxxxx"
-                                           value="{{ old('telepon') }}"
-                                           required>
+       class="form-control form-control-lg" 
+       id="telepon" 
+       name="telepon" 
+       placeholder="Masukkan nomor WhatsApp"
+       value="{{ old('telepon') }}"
+       required>
+
                                     @error('telepon')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -368,16 +369,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Phone number formatting
-    const phoneInput = document.getElementById('telepon');
-    phoneInput.addEventListener('input', function() {
-        let value = this.value.replace(/\D/g, '');
-        if (value.startsWith('0')) {
-            value = value;
-        } else if (value.startsWith('62')) {
-            value = '0' + value.substring(2);
-        }
-        this.value = value;
-    });
+   // Hanya hapus karakter non-angka
+const phoneInput = document.getElementById('telepon');
+phoneInput.addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, '');
+});
+
 });
 </script>
 @endsection

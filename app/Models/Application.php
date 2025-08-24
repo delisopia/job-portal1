@@ -10,7 +10,7 @@ class Application extends Model
     use HasFactory;
 
     protected $fillable = [
-        'job_id', 'user_id', 'nama', 'email', 'telepon', 'alamat', 'cv_path', 'status', 'applied_at'
+        'job_id', 'user_id', 'nama', 'email', 'telepon', 'alamat', 'kode_lamaran', 'cv_path', 'status', 'applied_at'
     ];
 
     protected function casts(): array

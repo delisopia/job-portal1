@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\ApplicationController as AdminApplicationControll
 use App\Http\Controllers\Admin\JobController as AdminJobController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Middleware\AdminMiddleware;
+use Illuminate\Support\Facades\Http;
+
+
 
 // ================== DEFAULT REDIRECT ==================
 Route::get('/', fn() => redirect('/jobs'));
@@ -85,3 +88,19 @@ Route::get('/lamaran/sukses', fn() => view('lamaran.sukses'))->name('lamaran.suk
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
 Route::get('/perusahaan/jobs/{job}', [PerusahaanJobController::class, 'show'])
      ->name('perusahaan.jobs.show');
+
+
+     
+     Route::get('/test-wa', function () {
+        $telephone = '6285267406514'; // ganti nomor WA tujuan (format 62xxx)
+        $message = 'Halo! Test WA berhasil dari Laravel 🚀';
+    
+        $response = Http::withHeaders([
+            'Authorization' => env('FONNTE_API_KEY'),
+        ])->post(env('FONNTE_API_URL'), [
+            'target'  => $telephone,   // wajib pakai key "target"
+            'message' => $message,
+        ]);
+    
+        return $response->json(); // biar langsung tampil JSON respon
+    });

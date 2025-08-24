@@ -44,4 +44,6 @@ class ApplyController extends Controller
 
         return redirect()->back()->with('success', 'Lamaran berhasil dikirim!');
     }
+
+    
 }

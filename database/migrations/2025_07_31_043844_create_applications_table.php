@@ -16,6 +16,7 @@ return new class extends Migration
         $table->string('telepon');
         $table->text('alamat');
         $table->string('cv');
+        $table->string('kode_lamaran')->unique(); // kode unik lamaran
         $table->timestamps();
 
         $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
