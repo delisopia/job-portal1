@@ -457,15 +457,47 @@
 
 
         <div class="sidebar-bottom">
-            <a href="https://wa.me/6281234567890" target="_blank" class="whatsapp-btn">
-                <i class="fab fa-whatsapp"></i>
-                <span>Kirim WA</span>
-            </a>
-            <a href="{{ url('/login') }}" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </a>
-        </div>
+    <!-- User bebas isi nomor WA siapa saja -->
+    <input type="text" id="waNumber" class="form-control mb-2" placeholder="Nomor WA (contoh: 81234567890)">
+    
+    <!-- User juga bisa isi pesan bebas -->
+    <textarea id="waMessage" class="form-control mb-2" rows="2" placeholder="Tulis pesan..."></textarea>
+    
+    <a href="#" onclick="sendWA()" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+        <span>Kirim WA</span>
+    </a>
+    <a href="{{ url('/login') }}" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+    </a>
+</div>
+
+<script>
+function sendWA() {
+    let number = document.getElementById("waNumber").value.trim();
+    let message = document.getElementById("waMessage").value.trim();
+
+    if (number) {
+        // Hapus karakter non angka (spasi, tanda - dll)
+        number = number.replace(/\D/g, "");
+
+        // Kalau belum ada kode negara, otomatis tambahkan 62
+        if (!number.startsWith("62")) {
+            number = "62" + number;
+        }
+
+        // Encode pesan agar aman untuk URL
+        let encodedMessage = encodeURIComponent(message || "Halo!");
+
+        // Buka WA dengan nomor & pesan sesuai input user
+        window.open("https://wa.me/" + number + "?text=" + encodedMessage, "_blank");
+    } else {
+        alert("Masukkan nomor WhatsApp terlebih dahulu!");
+    }
+}
+</script>
+
     </div>
 
     <!-- Main Content -->

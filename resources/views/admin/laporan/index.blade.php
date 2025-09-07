@@ -7,46 +7,46 @@
     <div class="card shadow">
         <div class="card-body">
             @if($applications->count())
-                <div class="table-responsive">
-                    <table id="table-pelamar" class="table table-striped table-bordered table-hover align-middle">
-                        <thead class="table-dark text-center">
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Pelamar</th>
-                                <th>Email</th>
-                                <th>Posisi</th>
-                                <th>Perusahaan</th>
-                                <th>Status Lamaran</th>
-                                <th>Tanggal Lamar</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            @foreach($applications as $index => $application)
-                            <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $application->user->name }}</td>
-                                <td>{{ $application->user->email }}</td>
-                                <td>{{ $application->job->posisi }}</td>
-                                <td>{{ $application->job->perusahaan }}</td>
-                                <td>
-                                    <form action="{{ route('admin.lamaran.updateStatus', $application->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm">
-                                            <option value="pending" {{ $application->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                                            <option value="diterima" {{ $application->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
-                                            <option value="ditolak" {{ $application->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
-                                        </select>
-                                    </form>
-                                </td>
-                                <td>{{ $application->created_at->format('d M Y') }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table id="table-pelamar" class="table table-striped table-bordered table-hover align-middle">
+                    <thead class="table-dark text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Pelamar</th>
+                            <th>Email</th>
+                            <th>Posisi</th>
+                            <th>Perusahaan</th>
+                            <th>Status Lamaran</th>
+                            <th>Tanggal Lamar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach($applications as $index => $application)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $application->nama }}</td>
+                            <td>{{ $application->email }}</td>
+                            <td>{{ $application->job->posisi }}</td>
+                            <td>{{ $application->job->perusahaan }}</td>
+                            <td>
+                                <form action="{{ route('admin.lamaran.updateStatus', $application->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="status" onchange="this.form.submit()" class="form-select form-select-sm">
+                                        <option value="pending" {{ $application->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="diterima" {{ $application->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                                        <option value="ditolak" {{ $application->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                    </select>
+                                </form>
+                            </td>
+                            <td>{{ $application->created_at->format('d M Y') }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             @else
-                <p class="text-muted">Belum ada pelamar.</p>
+            <p class="text-muted">Belum ada pelamar.</p>
             @endif
         </div>
     </div>
@@ -67,7 +67,7 @@
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#table-pelamar').DataTable({
             responsive: true,
             autoWidth: false,
